@@ -1816,13 +1816,9 @@
                     {
                       "boxShadow": "none",
                       "widgetName": "Update_Button",
-                      "onClick": "{{updateQuery.run(() => \n\tfindCustomers.run()\n)}}",
+                      "onClick": "{{updateQuery.run(() => \n\tfindCustomers.run(), () => showAlert('Cannot Update Customers. ERROR!','error'))}}",
                       "buttonColor": "#16a34a",
-                      "dynamicPropertyPathList": [
-                        {
-                          "key": "onClick"
-                        }
-                      ],
+                      "dynamicPropertyPathList": [],
                       "displayName": "Button",
                       "iconSVG": "/static/media/icon.cca026338f1c8eb6df8ba03d084c2fca.svg",
                       "searchTags": [
