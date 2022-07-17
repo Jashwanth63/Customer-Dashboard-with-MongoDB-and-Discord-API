@@ -2,7 +2,7 @@
   "pluginType": "DB",
   "pluginId": "mongo-plugin",
   "unpublishedAction": {
-    "name": "addCustomer",
+    "name": "insertQuery",
     "datasource": {
       "name": "Customer_database",
       "pluginId": "mongo-plugin",
@@ -73,12 +73,12 @@
         },
         "insert": {
           "documents": {
-            "data": ""
+            "data": "{\"CustomerName\": {{Customer_Add_Col2.text}}, \"CustomerID\": {{Customer_Add_Col1.text}},\n\"CustomerEmail\": \n{{Customer_Add_Col3.text}},\n\"DoNotDisturb\":\n{{Do_Not_Disturb.isSwitchedOn?1:0}}\n}"
           }
         },
         "misc": {
           "formToNativeQuery": {
-            "data": "{\n  \"insert\": \"customers\",\n  \"documents\": []\n}\n",
+            "data": "{\n  \"insert\": \"customers\",\n  \"documents\": {\"CustomerName\": {{Customer_Add_Col2.text}}, \"CustomerID\": {{Customer_Add_Col1.text}},\n\"CustomerEmail\": \n{{Customer_Add_Col3.text}},\n\"DoNotDisturb\":\n{{Do_Not_Disturb.isSwitchedOn?1:0}}\n}\n}\n",
             "status": "SUCCESS"
           }
         },
@@ -99,17 +99,26 @@
       }
     },
     "executeOnLoad": false,
-    "dynamicBindingPathList": [],
+    "dynamicBindingPathList": [
+      {
+        "key": "formData.insert.documents.data"
+      }
+    ],
     "isValid": true,
     "invalids": [],
     "messages": [],
-    "jsonPathKeys": [],
+    "jsonPathKeys": [
+      "Customer_Add_Col1.text",
+      "Customer_Add_Col2.text",
+      "Customer_Add_Col3.text",
+      "Do_Not_Disturb.isSwitchedOn?1:0"
+    ],
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": []
   },
-  "id": "Page1_addCustomer",
+  "id": "Page1_insertQuery",
   "deleted": false,
-  "gitSyncId": "62c43a6a78f4ff24c73058bb_62c89b6701213a676a34e559"
+  "gitSyncId": "62c43a6a78f4ff24c73058bb_62d3ade6279768242a2adb5a"
 }
