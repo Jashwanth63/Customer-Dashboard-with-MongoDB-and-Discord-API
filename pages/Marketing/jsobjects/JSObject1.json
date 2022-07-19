@@ -1,0 +1,15 @@
+{
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "Marketing",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "body": "export default {\n\tsendMessages: () => {\n\t\tif(DiscordSwitch.isSwitchedOn){\n\t\t\tDiscordAPI.run()\n\t\t\tconst successMessage1 = \"Message sent successfully to \".concat(List1.selectedItem.MailingList).concat(\"server\") \n\t\t\tshowAlert(successMessage1, \"success\")\n\t\t}\n\t\tif(EmailSwitch.isSwitchedOn){\n\t\t\tSendEmail.run()\n\t\t\tconst successMessage2 = \"Mail sent succesfully to \".concat(List1.selectedItem.MailingList).concat(\"list\") \n\t\t\tshowAlert(successMessage2, \"success\")\n\t\t}\n\t\tresetWidget(\"SendMessage_Modal\")\n\t\tcloseModal(\"SendMessage_Modal\")\n\t}\n}",
+    "variables": []
+  },
+  "id": "Marketing_JSObject1",
+  "deleted": false,
+  "gitSyncId": "62c43a6a78f4ff24c73058bb_62d67f60b06ce90d91dba306"
+}
