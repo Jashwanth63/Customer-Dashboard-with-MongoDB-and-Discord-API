@@ -1,8 +1,12 @@
 {
   "pages": [
     {
-      "id": "Page1",
+      "id": "Customer Information",
       "isDefault": true
+    },
+    {
+      "id": "Marketing",
+      "isDefault": false
     }
   ],
   "viewMode": false,

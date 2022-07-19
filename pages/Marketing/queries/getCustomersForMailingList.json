@@ -2,7 +2,7 @@
   "pluginType": "DB",
   "pluginId": "mongo-plugin",
   "unpublishedAction": {
-    "name": "deleteQuery",
+    "name": "getCustomersForMailingList",
     "datasource": {
       "name": "Customer_database",
       "pluginId": "mongo-plugin",
@@ -13,7 +13,7 @@
       "policies": [],
       "userPermissions": []
     },
-    "pageId": "Page1",
+    "pageId": "Marketing",
     "actionConfiguration": {
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
@@ -31,7 +31,7 @@
           "data": "customers"
         },
         "command": {
-          "data": "DELETE"
+          "data": "FIND"
         },
         "count": {
           "query": {
@@ -43,7 +43,7 @@
             "data": "SINGLE"
           },
           "query": {
-            "data": "{ _id :  ObjectId('{{ data_table.triggeredRow._id }}') }"
+            "data": ""
           }
         },
         "distinct": {
@@ -59,10 +59,10 @@
             "data": ""
           },
           "query": {
-            "data": ""
+            "data": "{CustomerID : {$in: {{List1.selectedItem.Users.length>0 ? List1.selectedItem.Users:[]}}\n}}"
           },
           "sort": {
-            "data": ""
+            "data": "{CustomerID: 1}"
           },
           "limit": {
             "data": ""
@@ -78,7 +78,7 @@
         },
         "misc": {
           "formToNativeQuery": {
-            "data": "{\n  \"delete\": \"customers\",\n  \"deletes\": [{\n    \"q\": { _id :  ObjectId('{{ data_table.triggeredRow._id }}') },\n    \"limit\": 1,\n  }]\n}\n",
+            "data": "{\n  \"find\": \"customers\",\n  \"filter\": {CustomerID : {$in: {{List1.selectedItem.Users.length>0 ? List1.selectedItem.Users:[]}}\n}},\n  \"sort\": {CustomerID: 1},\n  \"limit\": 10,\n  \"batchSize\": 10\n}\n",
             "status": "SUCCESS"
           }
         },
@@ -98,24 +98,24 @@
         }
       }
     },
-    "executeOnLoad": false,
+    "executeOnLoad": true,
     "dynamicBindingPathList": [
       {
-        "key": "formData.delete.query.data"
+        "key": "formData.find.query.data"
       }
     ],
     "isValid": true,
     "invalids": [],
     "messages": [],
     "jsonPathKeys": [
-      "data_table.triggeredRow._id"
+      "List1.selectedItem.Users.length>0 ? List1.selectedItem.Users:[]"
     ],
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": []
   },
-  "id": "Page1_deleteQuery",
+  "id": "Marketing_getCustomersForMailingList",
   "deleted": false,
-  "gitSyncId": "62c43a6a78f4ff24c73058bb_62c88f4a01213a676a34e1ca"
+  "gitSyncId": "62c43a6a78f4ff24c73058bb_62d66b02b06ce90d91db9bc1"
 }

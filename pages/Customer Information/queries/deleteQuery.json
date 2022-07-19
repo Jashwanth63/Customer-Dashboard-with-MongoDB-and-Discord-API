@@ -2,7 +2,7 @@
   "pluginType": "DB",
   "pluginId": "mongo-plugin",
   "unpublishedAction": {
-    "name": "updateQuery",
+    "name": "deleteQuery",
     "datasource": {
       "name": "Customer_database",
       "pluginId": "mongo-plugin",
@@ -13,7 +13,7 @@
       "policies": [],
       "userPermissions": []
     },
-    "pageId": "Page1",
+    "pageId": "Customer Information",
     "actionConfiguration": {
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
@@ -31,7 +31,7 @@
           "data": "customers"
         },
         "command": {
-          "data": "UPDATE"
+          "data": "DELETE"
         },
         "count": {
           "query": {
@@ -43,7 +43,7 @@
             "data": "SINGLE"
           },
           "query": {
-            "data": ""
+            "data": "{ _id :  ObjectId('{{ data_table.triggeredRow._id }}') }"
           }
         },
         "distinct": {
@@ -78,7 +78,7 @@
         },
         "misc": {
           "formToNativeQuery": {
-            "data": "{\n  \"update\": \"customers\",\n  \"updates\": [{\n    \"q\": { _id : ObjectId('{{data_table.selectedRow._id}}')\n},\n    \"u\": {\n 'CustomerID': {{UpdateID.text}},\n 'CustomerName': {{UpdateName.text}},\n'CustomerEmail': {{UpdateEmail.text}},\n'DoNotDisturb': {{UpdateDND.isSwitchedOn?1:0}}\n},\n    \"multi\": false,\n  }]\n}\n",
+            "data": "{\n  \"delete\": \"customers\",\n  \"deletes\": [{\n    \"q\": { _id :  ObjectId('{{ data_table.triggeredRow._id }}') },\n    \"limit\": 1,\n  }]\n}\n",
             "status": "SUCCESS"
           }
         },
@@ -90,10 +90,10 @@
             "data": "SINGLE"
           },
           "query": {
-            "data": "{ _id : ObjectId('{{data_table.selectedRow._id}}')\n}"
+            "data": ""
           },
           "update": {
-            "data": "{\n 'CustomerID': {{UpdateID.text}},\n 'CustomerName': {{UpdateName.text}},\n'CustomerEmail': {{UpdateEmail.text}},\n'DoNotDisturb': {{UpdateDND.isSwitchedOn?1:0}}\n}"
+            "data": ""
           }
         }
       }
@@ -101,28 +101,21 @@
     "executeOnLoad": false,
     "dynamicBindingPathList": [
       {
-        "key": "formData.updateMany.query.data"
-      },
-      {
-        "key": "formData.updateMany.update.data"
+        "key": "formData.delete.query.data"
       }
     ],
     "isValid": true,
     "invalids": [],
     "messages": [],
     "jsonPathKeys": [
-      "UpdateDND.isSwitchedOn?1:0",
-      "UpdateEmail.text",
-      "UpdateID.text",
-      "UpdateName.text",
-      "data_table.selectedRow._id"
+      "data_table.triggeredRow._id"
     ],
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": []
   },
-  "id": "Page1_updateQuery",
+  "id": "Customer Information_deleteQuery",
   "deleted": false,
-  "gitSyncId": "62c43a6a78f4ff24c73058bb_62d3b72e279768242a2adcea"
+  "gitSyncId": "62c43a6a78f4ff24c73058bb_62c88f4a01213a676a34e1ca"
 }

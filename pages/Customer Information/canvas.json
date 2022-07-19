@@ -1,7 +1,7 @@
 {
   "unpublishedPage": {
-    "name": "Page1",
-    "slug": "page1",
+    "name": "Customer Information",
+    "slug": "customer-information",
     "layouts": [
       {
         "viewMode": false,
@@ -1895,7 +1895,7 @@
         "layoutOnLoadActions": [
           [
             {
-              "id": "Page1_findCustomers",
+              "id": "Customer Information_findCustomers",
               "name": "findCustomers",
               "confirmBeforeExecute": false,
               "pluginType": "DB",
@@ -1911,14 +1911,15 @@
           "data_table"
         ],
         "validOnPageLoadActions": true,
-        "id": "Page1",
+        "id": "Customer Information",
         "deleted": false,
         "policies": [],
         "userPermissions": []
       }
     ],
     "userPermissions": [],
-    "policies": []
+    "policies": [],
+    "isHidden": false
   },
   "deleted": false,
   "gitSyncId": "62c43a6a78f4ff24c73058bb_62c43a6a78f4ff24c73058bd"

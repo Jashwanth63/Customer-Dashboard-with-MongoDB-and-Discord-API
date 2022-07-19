@@ -2,7 +2,7 @@
   "pluginType": "DB",
   "pluginId": "mongo-plugin",
   "unpublishedAction": {
-    "name": "findCustomers",
+    "name": "addMarketingListCustomers",
     "datasource": {
       "name": "Customer_database",
       "pluginId": "mongo-plugin",
@@ -13,7 +13,7 @@
       "policies": [],
       "userPermissions": []
     },
-    "pageId": "Page1",
+    "pageId": "Marketing",
     "actionConfiguration": {
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
@@ -28,10 +28,10 @@
           }
         },
         "collection": {
-          "data": "customers"
+          "data": "marketinglist"
         },
         "command": {
-          "data": "FIND"
+          "data": "INSERT"
         },
         "count": {
           "query": {
@@ -62,7 +62,7 @@
             "data": ""
           },
           "sort": {
-            "data": "{ {{ Key_Select.selectedOptionValue }} : \n{{ Order_Select.selectedOptionValue }} }"
+            "data": ""
           },
           "limit": {
             "data": ""
@@ -73,12 +73,12 @@
         },
         "insert": {
           "documents": {
-            "data": ""
+            "data": "{\n\"Discord_Webhook\" : {{Discord_Hook_input.text}}, \n\"CreationDate\" : {{moment().format('YYYY-MM-DDT00:00:00.000Z')}}, \n\"MailingList\"\n: {{Mailing_Name.text}}, \n\"MailingListID\"\n:{{MailingListId.text}}, \n\"Icon\"\n: {{Icon_URL.text}},\n\"Users\": {{Reachable_Customers_Table.selectedRows.map(a => a.CustomerID)}}\n}"
           }
         },
         "misc": {
           "formToNativeQuery": {
-            "data": "{\n  \"find\": \"customers\",\n  \"sort\": { {{ Key_Select.selectedOptionValue }} : \n{{ Order_Select.selectedOptionValue }} },\n  \"limit\": 10,\n  \"batchSize\": 10\n}\n",
+            "data": "{\n  \"insert\": \"marketinglist\",\n  \"documents\": {\n\"Discord_Webhook\" : {{Discord_Hook_input.text}}, \n\"CreationDate\" : {{moment().format('YYYY-MM-DDT00:00:00.000Z')}}, \n\"MailingList\"\n: {{Mailing_Name.text}}, \n\"MailingListID\"\n:{{MailingListId.text}}, \n\"Icon\"\n: {{Icon_URL.text}},\n\"Users\": {{Reachable_Customers_Table.selectedRows.map(a => a.CustomerID)}}\n}\n}\n",
             "status": "SUCCESS"
           }
         },
@@ -98,25 +98,29 @@
         }
       }
     },
-    "executeOnLoad": true,
+    "executeOnLoad": false,
     "dynamicBindingPathList": [
       {
-        "key": "formData.find.sort.data"
+        "key": "formData.insert.documents.data"
       }
     ],
     "isValid": true,
     "invalids": [],
     "messages": [],
     "jsonPathKeys": [
-      "Key_Select.selectedOptionValue",
-      "Order_Select.selectedOptionValue"
+      "Discord_Hook_input.text",
+      "Icon_URL.text",
+      "MailingListId.text",
+      "Mailing_Name.text",
+      "Reachable_Customers_Table.selectedRows.map(a => a.CustomerID)",
+      "moment().format('YYYY-MM-DDT00:00:00.000Z')"
     ],
     "userSetOnLoad": false,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": []
   },
-  "id": "Page1_findCustomers",
+  "id": "Marketing_addMarketingListCustomers",
   "deleted": false,
-  "gitSyncId": "62c43a6a78f4ff24c73058bb_62c61701a7befc258dde4f35"
+  "gitSyncId": "62c43a6a78f4ff24c73058bb_62d6650ab06ce90d91db9994"
 }
